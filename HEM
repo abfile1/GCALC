@@ -1,44 +1,44 @@
 def HEM(Cd, P, h, data):
-lbound = -1
-for i in range(len(data.keys())):
-if P < list(data.keys())[1]:
-lbound = list(data.keys())[i-1]
-break
-ubound = list(data.keys())[i]
-hs = data[lbound][1]
-for i in range(len(hs)):
-if h < hs[i]:
-ha = hs[i-1]
-Ga = data[lbound][0][i-1]
-break
-hb = hs[i]
-Gb = data[lbound][0][i]
-hs = data[ubound][1]
-for i in range(len(hs)):
-if h < hs[i]:
-hpa = hs[i-1]
-Gpa = data[ubound][0][i-1]
-break
-hpb = hs[i]
-Gpb = data[ubound][0][i]
+    lbound = -1
+    for i in range(len(data.keys())):
+        if P < list(data.keys())[1]:
+            lbound = list(data.keys())[i-1]
+            break
+    ubound = list(data.keys())[i]
+    hs = data[lbound][1]
+    for i in range(len(hs)):
+        if h < hs[i]:
+            ha = hs[i-1]
+            Ga = data[lbound][0][i-1]
+            break
+    hb = hs[i]
+    Gb = data[lbound][0][i]
+    hs = data[ubound][1]
+    for i in range(len(hs)):
+        if h < hs[i]:
+            hpa = hs[i-1]
+            Gpa = data[ubound][0][i-1]
+            break
+    hpb = hs[i]
+    Gpb = data[ubound][0][i]
   
-G1 = (Gb - Ga) * ((h - ha) / (hb - ha)) + Ga
-G2 = (Gpb - Gpa) * ((h - hpa) / (hpb - hpa)) + Gpa
-GG = (G2 - G1) * ((P - lbound) / (ubound - lbound)) + G1
-return Cd * GG
+    G1 = (Gb - Ga) * ((h - ha) / (hb - ha)) + Ga
+    G2 = (Gpb - Gpa) * ((h - hpa) / (hpb - hpa)) + Gpa
+    GG = (G2 - G1) * ((P - lbound) / (ubound - lbound)) + G1
+    return Cd * GG
   
 f = open("HEM.dat", 'r')
 lines = f.readlines()
 data = {}
-fpr l in lines:
-vals = [float(str) for str in l.split()]
-p = vals[0]
-G = []
-h = []
-for i in range(1, len(vals), 2):
-G.append(vals[i])
-h.append(vals[i+1])
-data[p] = [G, h]
+for l in lines:
+    vals = [float(str) for str in l.split()]
+    p = vals[0]
+    G = []
+    h = []
+    for i in range(1, len(vals), 2):
+        G.append(vals[i])
+        h.append(vals[i+1])
+    data[p] = [G, h]
 
 Cd = 0.564
 P = 30.875
